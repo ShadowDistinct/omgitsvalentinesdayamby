@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMG IS THAT AI OR MAJA????</title>
+    <link rel="stylesheet" href="ai.css">
+    <style>
+        #next-challenge {
+            display: none;
+            margin-top: 20px;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff66b2;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #next-challenge:hover {
+            background-color: #ff3385;
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz">
+        <h1>Did yours truly write that or did a *gasp* a robot write that?????</h1>
+        <div class="flex-text"> 
+            <div id="question"></div>
+            <div id="options"></div>
+        </div>
+        <button id="next-challenge" onclick="goToNextChallenge()">Next Challenge</button>
+    </div>
+
+    <script src="ai.js"></script>
+    <script>
+        function showNextButton() {
+            document.getElementById("next-challenge").style.display = "block";
+        }
+
+        function goToNextChallenge() {
+            window.location.href = "quiz.html";
+        }
+    </script>
+</body>
+</html>

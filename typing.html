@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>omg why do you type so slow smh</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
+        #typing-box { width: 300px; height: 30px; font-size: 16px; }
+        #message { margin-top: 20px; font-size: 20px; font-weight: bold; }
+        #retry-button, #next-button {
+            margin-top: 20px; 
+            display: none; 
+            padding: 12px 24px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s ease-in-out;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* Retry Button - Vibrant Pink */
+        #retry-button {
+            background: linear-gradient(90deg, #ff6392, #ff3385);
+            box-shadow: 0px 4px 10px rgba(255, 99, 146, 0.5);
+        }
+
+        #retry-button:hover {
+            background: linear-gradient(90deg, #ff3385, #ff6392);
+            box-shadow: 0px 6px 15px rgba(255, 51, 133, 0.8);
+            transform: scale(1.05);
+        }
+
+        /* Next Button - Soft Pastel Pink to Light Blue */
+        #next-button {
+            background: linear-gradient(90deg, #ffb6ff, #87cefa);
+            box-shadow: 0px 4px 10px rgba(135, 206, 250, 0.5);
+        }
+
+        #next-button:hover {
+            background: linear-gradient(90deg, #87cefa, #ffb6ff);
+            box-shadow: 0px 6px 15px rgba(135, 206, 250, 0.8);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Typing Speed Love Test</h1>
+    <p>Type "I love Maja" as fast as you can in 30 seconds!</p>
+    <input type="text" id="typing-box" placeholder="Start typing..." autocomplete="off">
+    <p>Time left: <span id="timer">30</span> seconds</p>
+    <p>Score: <span id="score">0</span></p>
+    <p id="message"></p>
+    <button id="retry-button">Retry</button>
+    <button id="next-button" onclick="window.location.href='message.html'">Next</button>
+
+    <script>
+        let timeLeft = 30;
+        let score = 0;
+        let timerStarted = false;
+        const typingBox = document.getElementById("typing-box");
+        const timerDisplay = document.getElementById("timer");
+        const scoreDisplay = document.getElementById("score");
+        const messageDisplay = document.getElementById("message");
+        const retryButton = document.getElementById("retry-button");
+        const nextButton = document.getElementById("next-button");
+
+        function startTimer() {
+            timerStarted = true;
+            const timer = setInterval(() => {
+                timeLeft--;
+                timerDisplay.textContent = timeLeft;
+                if (timeLeft === 0) {
+                    clearInterval(timer);
+                    typingBox.disabled = true;
+                    showResult();
+                }
+            }, 1000);
+        }
+
+        typingBox.addEventListener("input", () => {
+            if (!timerStarted) startTimer();
+            if (typingBox.value.toLowerCase() === "i love maja") {
+                score++;
+                scoreDisplay.textContent = score;
+                typingBox.value = "";
+            }
+        });
+
+        retryButton.addEventListener("click", () => {
+            timeLeft = 30;
+            score = 0;
+            timerStarted = false;
+            typingBox.disabled = false;
+            typingBox.value = "";
+            timerDisplay.textContent = timeLeft;
+            scoreDisplay.textContent = score;
+            messageDisplay.textContent = "";
+            retryButton.style.display = "none";
+            nextButton.style.display = "none";
+        });
+
+        function showResult() {
+            if (score >= 20) {
+                messageDisplay.textContent = "YOU'RE AMAZING!!! I LOVE YOU TOO ♥";
+            } else if (score >= 10) {
+                messageDisplay.textContent = "Good job, but you can do better!";
+            } else if (score >= 5) {
+                messageDisplay.textContent = "Are you even trying? :(";
+            } else {
+                messageDisplay.textContent = "YOU HATE ME??? 💔💔💔";
+            }
+            
+            retryButton.style.display = "inline-block";
+            nextButton.style.display = "inline-block";
+        }
+    </script>
+</body>
+</html>
